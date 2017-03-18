@@ -1,0 +1,90 @@
+
+
+## Fun in New York!
+
+I'm going to New York soon and realized it's a good chance combine what we just learned in Developing Data Products and what is on my todo list! I marked all the attractions I will go with red heart, You can click on each link that direct you to their official websites. And around all red heart within blue circle, it shows you the real-time map of all citibikes around you that you can use. 
+
+```{r, eval=FALSE, echo=FALSE}
+library(leaflet)
+library(shiny)
+AttractionIcon<- makeIcon(
+  iconUrl = 'http://www.clker.com/cliparts/9/A/I/s/M/X/heart-fund-logo.svg',
+  iconWidth = 60, iconHeight = 60,
+  iconAnchorX = 30, iconAnchorY = 30
+  
+)
+NewYorkAttract <- data.frame(
+  lat = c(40.6892494,40.7829045,40.758895,40.7794376,40.7614342),
+  lng = c(-74.0466891,-73.9589513,-73.9873197,-73.9633131,-73.9776524)
+  )
+
+NewYorkAttractSites <- c(
+  "<a href='https://www.nps.gov/stli/index.htm'>Statue of Liberty</a>",
+  "<a href='https://www.guggenheim.org/'>Guggenheim</a>",
+  "<a href='http://www.timessquarenyc.org/index.aspx'>Time Square</a>",
+  "<a href='http://www.metmuseum.org/'>The Metropolitan Museum of Art</a>",
+  "<a href='https://www.moma.org/'>The Museum of Modern Art</a>"
+)
+library(jsonlite)
+citibike <- fromJSON("http://citibikenyc.com/stations/json")
+NewYorkBikes<-data.frame(
+  lat<-citibike$stationBeanList$latitude,
+  lng<-citibike$stationBeanList$longitude
+)
+colnames(NewYorkBikes)[which(names(NewYorkBikes)=="lat....citibike.stationBeanList.latitude")]<-"lat"
+colnames(NewYorkBikes)[which(names(NewYorkBikes)=="lng....citibike.stationBeanList.longitude")]<-"lng"
+
+
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(data=NewYorkAttract, clusterOptions = markerClusterOptions(),popup = NewYorkAttractSites, group="Attractions", icon=AttractionIcon) %>%
+  addCircles(data=NewYorkAttract, weight=1,radius=1000 )%>%
+  addMarkers(data=NewYorkBikes, clusterOptions=markerClusterOptions(), group="Bikes")
+
+```
+
+
+
+```{r, echo=FALSE}
+library(leaflet)
+library(shiny)
+AttractionIcon<- makeIcon(
+  iconUrl = 'http://www.clker.com/cliparts/9/A/I/s/M/X/heart-fund-logo.svg',
+  iconWidth = 60, iconHeight = 60,
+  iconAnchorX = 30, iconAnchorY = 30
+  
+)
+NewYorkAttract <- data.frame(
+  lat = c(40.6892494,40.7829045,40.758895,40.7794376,40.7614342),
+  lng = c(-74.0466891,-73.9589513,-73.9873197,-73.9633131,-73.9776524)
+  )
+
+NewYorkAttractSites <- c(
+  "<a href='https://www.nps.gov/stli/index.htm'>Statue of Liberty</a>",
+  "<a href='https://www.guggenheim.org/'>Guggenheim</a>",
+  "<a href='http://www.timessquarenyc.org/index.aspx'>Time Square</a>",
+  "<a href='http://www.metmuseum.org/'>The Metropolitan Museum of Art</a>",
+  "<a href='https://www.moma.org/'>The Museum of Modern Art</a>"
+)
+library(jsonlite)
+citibike <- fromJSON("http://citibikenyc.com/stations/json")
+NewYorkBikes<-data.frame(
+  lat<-citibike$stationBeanList$latitude,
+  lng<-citibike$stationBeanList$longitude
+)
+colnames(NewYorkBikes)[which(names(NewYorkBikes)=="lat....citibike.stationBeanList.latitude")]<-"lat"
+colnames(NewYorkBikes)[which(names(NewYorkBikes)=="lng....citibike.stationBeanList.longitude")]<-"lng"
+
+
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(data=NewYorkAttract, clusterOptions = markerClusterOptions(),popup = NewYorkAttractSites, group="Attractions", icon=AttractionIcon) %>%
+  addCircles(data=NewYorkAttract, weight=1,radius=1000 )%>%
+  addMarkers(data=NewYorkBikes, clusterOptions=markerClusterOptions(), group="Bikes")
+```
+
+
+
+
+
+
