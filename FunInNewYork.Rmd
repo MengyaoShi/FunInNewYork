@@ -1,8 +1,14 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 
 
 ## Fun in New York!
+This is a webpage originally posted on March 18th 2017.
 
-I'm going to New York soon and realized it's a good chance combine what we just learned in Developing Data Products and what is on my todo list! I marked all the attractions I will go with red heart, You can click on each link that direct you to their official websites. And around all red heart within blue circle, it shows you the real-time map of all citibikes around you that you can use. 
+I'm going to New York soon (March 2017)and realized it's a good chance combine what we just learned in Developing Data Products and what is on my todo list! I marked all the attractions I will go with red heart, You can click on each link that direct you to their official websites. And around all red heart within blue circle, it shows you the real-time map of all citibikes around you that you can use. 
 
 ```{r, eval=FALSE, echo=FALSE}
 library(leaflet)
